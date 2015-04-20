@@ -14,3 +14,10 @@ Chrome devtools extension to generate a URL for your timeline - wip
 
 ### Screenshot
 ![](http://i.imgur.com/KZ0Wrr2.png)
+
+
+### Example URL
+
+chrome-devtools://devtools/bundled/devtools.html?remoteFrontendUrl=chrome-devtools://devtools/remote/serve_rev/@193610/inspector.html&loadTimelineFromURL=https://dl.dropboxusercontent.com/u/39519/temp/colorpicker-color-dragging-TimelineRawData-20150415T010640.json
+
+(only works in canary for now)
