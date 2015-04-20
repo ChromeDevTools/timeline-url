@@ -16,6 +16,10 @@ Chrome devtools extension to generate a URL for your timeline - wip
 ![](http://i.imgur.com/KZ0Wrr2.png)
 
 
+### Installation
+
+Not published to store yet, so clone the repo, run `npm install` and `grunt debug` and add `app/` in `chrome://extensions/` > "load upacked extension"
+
 ### Example URL
 
 chrome-devtools://devtools/bundled/devtools.html?remoteFrontendUrl=chrome-devtools://devtools/remote/serve_rev/@193610/inspector.html&loadTimelineFromURL=https://dl.dropboxusercontent.com/u/39519/temp/colorpicker-color-dragging-TimelineRawData-20150415T010640.json
