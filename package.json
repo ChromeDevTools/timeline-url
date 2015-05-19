@@ -1,6 +1,5 @@
 {
-  "name": "timeline-url",
-  "version": "0.0.0",
+  "private": true,
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.5.0",
@@ -21,8 +20,5 @@
     "jshint-stylish": "~0.1.5",
     "grunt-chrome-manifest": "~0.2.0",
     "grunt-contrib-compress": "~0.9.1"
-  },
-  "engines": {
-    "node": ">=0.10.0"
   }
 }

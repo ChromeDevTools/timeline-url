@@ -1,7 +1,7 @@
 'use strict';
 
 function getRevs() {
-	var chromeVersion = navigator.appVersion.replace(/(.+)Chrome\/(.+) (.+)/, '$2');
+	var chromeVersion = navigator.appVersion.replace(/.+Chrome\/(.+) .+/, '$1');
 
 	return window.fetch('https://omahaproxy.appspot.com/webkit.json?version=' + chromeVersion).then(function (r) {
 		return r.json();
