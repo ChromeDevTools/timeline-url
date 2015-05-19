@@ -13,8 +13,10 @@ Chrome devtools extension to generate a URL to share your timeline _[WIP]_
 * Open the "Timeline URL" plane
 * Drop the (publicely accessable) URL to your timeline in the text area
 * Copy the big url it returns
-* You can send it around to your team, report it in a bug, ...
+* You can send it around to your team, attach it to a bug report, ...
 * Everybody using chrome can access your timeline using that URL.
+
+_Only works in Chrome Canary/Beta for the time being._
 
 ## Screenshot
 
