@@ -1,6 +1,6 @@
 {
 	"name": "timeline-url",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"manifest_version": 2,
 	"description": "Easily share a devtools timeline using a simple URL",
 	"devtools_page": "devtools.html",
@@ -10,5 +10,7 @@
 	},
 	"background": {
 		"scripts": [ "scripts/chromereload.js" ]
-	}
+	},
+	"permissions": [ "clipboardWrite" ]
+
 }
