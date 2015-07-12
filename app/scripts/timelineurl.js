@@ -1,40 +1,5 @@
 'use strict';
 
-class Clipboard {
-	constructor(opts) {
-		this.addEventListeners();
-		this.input = opts.elem;
-		this.textForClipboard = opts.text;
-		this.callback = opts.callback;
-		this.copyTextToClipboard();
-	}
-	addEventListeners() {
-		// grab the copy event and hijack it.
-		document.addEventListener('copy', this.handleCopyEvent.bind(this), true);
-	}
-
-	focusArea() {
-		// In order to ensure that the browser will fire clipboard events, we always need to have something selected
-		this.input.focus();
-		this.input.select();
-	}
-
-	copyTextToClipboard() {
-		this.focusArea();
-		this.input.value = this.textForClipboard;
-		this.input.select();
-		document.execCommand('copy');
-	}
-
-	handleCopyEvent (e){
-		e.clipboardData.setData('text/plain', this.textForClipboard);
-		this.focusArea();
-		e.preventDefault();
-
-		this.callback();
-	}
-}
-
 class TimelineUrl {
 	constructor(win) {
 
@@ -116,7 +81,7 @@ class TimelineUrl {
 		this.generateBtn.textContent += '…';
 		this.resultsDiv.style.opacity = 0;
 
-		this.inputUrl = normalizeInputUrl(this.input.value);
+		this.inputUrl = this.normalizeInputUrl(this.input.value);
 
 		this.checkForCORS()
 		.then(this.getRevs.bind(this))
@@ -132,7 +97,6 @@ console.log('sup', arguments);
 		}.bind(this));
 	}
 
-
 	success(){
 		this.result.value = this.outputUrl;
 		this.result.hidden = this.confirmation.hidden = false;
@@ -140,30 +104,3 @@ console.log('sup', arguments);
 		console.log('omg we did it.');
 	}
 }
-
-
-
-
-
-class TimelineUrlPane {
-
-	constructor() {
-		this.paneTitle = 'Generate Timeline URL';
-		this.createSidebar();
-	}
-
-	createSidebar(){
-		chrome.devtools.panels.sources.createSidebarPane(this.paneTitle, function (sidebar) {
-			sidebar.setPage('sidebar.html');
-			sidebar.onShown.addListener(this.bindEvents.bind(this));
-		}.bind(this));
-	}
-
-	bindEvents(win) {
-		win.generateBtn.addEventListener('click', function(){
-			new TimelineUrl(win);
-		});
-	}
-}
-
-var tlpane = new TimelineUrlPane();
