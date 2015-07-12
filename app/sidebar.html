@@ -1,11 +1,21 @@
 <!doctype html>
 <style>
-	#timeline-url, #result {
+	#result {
 		width: 100%;
 	}
+	p {
+		margin: 6px 0px;
+		color: #333;
+	}
+	.flex { 
+		display: flex;
+	}
 	#generateBtn {
-		width: 80%;
-		margin: 5px 10%;
+		margin: 2px 5px;
+    	flex: 0 1 64px;
+	}
+	input#timeline-url {
+		flex: 1 1 auto;
 	}
 	#result {
     	font-size: 9px;
@@ -19,27 +29,46 @@
 	}
 	ol input {
 		width: calc(100% - 14px );
+		margin-bottom: 1px;
 	}
 	summary {
 		cursor: pointer;
     	-webkit-user-select: none;
+    	margin-top: 8px;
 	}
 	#confirmation {
-		margin-bottom: 0;
+		margin: 2px 0 0;
 	}
 	#results {
-		transition: opacity 150ms;
-		opacity: 0;
+		will-change: opacity;
+	}
+	#results:not([hidden]) {
+		animation: fade-in 500ms;
+	}
+	results:not([hidden]) > .confirmation > span {
+		animation: fade-out 500ms;
+		animation-delay: 750ms;
+	}
+	@keyframes fade-in {
+		from 	{ opacity: 0 },
+		to 		{ opacity: 1 }
+	}
+	@keyframes fade-out {
+		from 	{ opacity: 1 },
+		to 		{ opacity: 0 }
 	}
 </style>
 
 <p>Right-click in the Timeline panel, <em>Save Timeline Data…</em>, then upload the JSON to a publically available URL.</p>
-<input type="url" id="timeline-url" placeholder="URL to uploaded timeline json" >
-<button id="generateBtn">Generate URL</button>
 
-<div id="results">
-	<p id="confirmation" hidden>✅ Your new URL is copied to your clipboard</p>
-	<input id="result" readonly hidden>
+<div class="flex">
+	<input type="url" id="timeline-url" placeholder="URL of uploaded timeline json" >
+	<button id="generateBtn">Generate URL</button>
+</div>
+
+<div id="results" hidden>
+	<p id="confirmation"><span>✅</span> Your new URL is copied to your clipboard:</p>
+	<input id="result" readonly>
 </div>
 
 <details>

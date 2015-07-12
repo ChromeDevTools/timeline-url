@@ -78,15 +78,15 @@ class TimelineUrl {
 
 	generateUrl(){
 
-		this.generateBtn.textContent += '…';
-		this.resultsDiv.style.opacity = 0;
+		this.generateBtn.textContent = '🔄';
+		this.resultsDiv.hidden = true;
 
 		this.inputUrl = this.normalizeInputUrl(this.input.value);
 
 		this.checkForCORS()
 		.then(this.getRevs.bind(this))
-		.then(function (){
-console.log('sup', arguments);
+		.then(() => {
+
 			this.outputUrl = this.getUrl(this.inputUrl);
 
 			new Clipboard({
@@ -97,10 +97,12 @@ console.log('sup', arguments);
 		}.bind(this));
 	}
 
-	success(){
+	success(opts){
+		if (opts.copied == false)
+			this.confirmation.hidden = true;
+
+		this.generateBtn.textContent = 'Generate';
 		this.result.value = this.outputUrl;
-		this.result.hidden = this.confirmation.hidden = false;
-		this.resultsDiv.style.opacity = 1;
-		console.log('omg we did it.');
+		this.resultsDiv.hidden = false;
 	}
 }
