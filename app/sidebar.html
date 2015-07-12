@@ -7,12 +7,18 @@
 		width: 80%;
 		margin: 5px 10%;
 	}
+	#result { 
+		height: 57px;
+	}
+	body {
+		min-height: 180px;
+	}
 </style>
 
 
 <p>Please upload your JSON to a publically available URL.</p>
 <input type="url" id="timeline-url" placeholder="URL to uploaded timeline json">
-<button id="generate">Generate…</button>
+<button id="generate">Generate Timeline URL…</button>
 
 <p id="confirmation" hidden>This URL has just been copied to your clipboard:</p>
 <textarea id="result" readonly hidden></textarea>

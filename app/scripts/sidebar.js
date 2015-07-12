@@ -1,15 +1,5 @@
 'use strict';
 
-function addBling(win) {
-	/* bling.js */
-	window.$ = win.document.querySelectorAll.bind(win.document);
-	win.Node.prototype.on = win.on = function (name, fn) {
-		this.addEventListener(name, fn);
-	};
-
-}
-
-
 class Clipboard {
 	constructor(opts) {
 		this.addEventListeners();
@@ -25,7 +15,6 @@ class Clipboard {
 
 	focusArea() {
 		// In order to ensure that the browser will fire clipboard events, we always need to have something selected
-		this.input.value = '';
 		this.input.focus();
 		this.input.select();
 	}
@@ -46,42 +35,65 @@ class Clipboard {
 	}
 }
 
+class TimelineUrl {
+	constructor() {
+		this.input = undefined;
+		this.result = undefined;
+		this.generate = undefined;
 
-function getRevs() {
-	var chromeVersion = navigator.appVersion.replace(/.+Chrome\/(.+) .+/, '$1');
+		this.createSidebar();
+	}
 
-	return window.fetch('https://omahaproxy.appspot.com/webkit.json?version=' + chromeVersion).then(function (r) {
-		return r.json();
-	});
-}
+	getRevs() {
+		var chromeVersion = navigator.appVersion.replace(/.+Chrome\/(.+) .+/, '$1');
 
+		return window.fetch('https://omahaproxy.appspot.com/webkit.json?version=' + chromeVersion).then(function (r) {
+			return r.json();
+		});
+	}
 
-function getUrl(rev, url) {
-	return 'chrome-devtools://devtools/bundled/devtools.html?remoteFrontendUrl=chrome-devtools://devtools/remote/serve_rev/@' + rev + '/inspector.html&loadTimelineFromURL=' + url;
-}
+	getUrl(rev, url) {
+		return 'chrome-devtools://devtools/bundled/devtools.html?remoteFrontendUrl=chrome-devtools://devtools/remote/serve_rev/@' + rev + '/inspector.html&loadTimelineFromURL=' + url;
+	}
 
-function success(){
- 	console.log('omg');
-}
+	createSidebar(){
+		chrome.devtools.panels.sources.createSidebarPane('Timeline URL', function (sidebar) {
+			sidebar.setPage('sidebar.html');
+			sidebar.onShown.addListener(this.sidebarInit.bind(this));
+		}.bind(this));
+	}
 
-function sidebarInit(win) {
-	addBling(win);
+	generateUrl(){
+		this.getRevs()
+		.then(function (revs) {
+			this.result.value = this.getUrl(revs.blink_position, this.input.value);
 
-	var input = $('#timeline-url')[0];
-	var result = $('#result')[0];
-	var generate = $('#generate')[0];
-
-	generate.on('click', function () {
-		getRevs().then(function (revs) {
-			result.value = getUrl(revs.blink_position, input.value);
-			var cb = new Clipboard({
-				elem : result, text : result.value, callback : success
+		}.bind(this))
+		.then()(function (){
+			new Clipboard({
+				elem : this.result,
+				text : this.result.value,
+				callback : this.success.bind(this)
 			});
 		});
-	});
+	}
+
+	sidebarInit(win) {
+
+		this.input = win['timeline-url'];
+		this.result = win.result;
+		this.generateBtn = win.generate;
+		this.confirmation = win.confirmation;
+
+		this.generateBtn.addEventListener('click', this.generateUrl.bind(this));
+	}
+
+	success(){
+		this.result.hidden = this.confirmation.hidden = false;
+		console.log('omg');
+	}
 }
 
-chrome.devtools.panels.sources.createSidebarPane('Timeline URL', function (sidebar) {
-	sidebar.setPage('sidebar.html');
-	sidebar.onShown.addListener(sidebarInit);
-});
+
+new TimelineUrl();
+
