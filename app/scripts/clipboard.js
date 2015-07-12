@@ -2,34 +2,23 @@
 
 class Clipboard {
 	constructor(opts) {
-		this.addEventListeners();
 		this.input = opts.elem;
 		this.textForClipboard = opts.text;
 		this.callback = opts.callback;
-		this.copyTextToClipboard();
-	}
-	addEventListeners() {
-		// grab the copy event and hijack it.
-		document.addEventListener('copy', this.handleCopyEvent.bind(this), true);
-	}
+		this.doc = this.input.ownerDocument;
 
-	focusArea() {
-		// In order to ensure that the browser will fire clipboard events, we always need to have something selected
-		this.input.focus();
-		this.input.select();
+		if (!this.doc.queryCommandSupported('copy'))
+			this.callback({ copied : false });
+
+		this.copyTextToClipboard();
 	}
 
 	copyTextToClipboard() {
-		this.focusArea();
 		this.input.value = this.textForClipboard;
 		this.input.select();
-		document.execCommand('copy');
-	}
+		var successful = this.doc.execCommand('copy');
+		console.log('Copying to clipboard', successful ? 'SUCCEEDED' : 'FAILED');
 
-	handleCopyEvent (e){
-		e.clipboardData.setData('text/plain', this.textForClipboard);
-		this.focusArea();
-		e.preventDefault();
-		this.callback();
+		this.callback({ copied : successful });
 	}
 }
