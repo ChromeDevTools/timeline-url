@@ -24,7 +24,7 @@ class TimelineUrl {
 
 		var revInfo = {};
 		var revUrls = ['https://omahaproxy.appspot.com/revision.json?version=',
-						'https://omahaproxy.appspot.com/webkit.json?version='];
+			'https://omahaproxy.appspot.com/webkit.json?version='];
 
 		// take our two URLs, fetch them in parallel, parse to JSON, and merge.
 		return revUrls.map(
@@ -44,24 +44,23 @@ class TimelineUrl {
 
 	getUrl(url) {
 
-		var chrome_rev = this.revInfo.chromium_base_position;
-		var blink_rev = this.revInfo.blink_position;
+		var chromeRev = this.revInfo.chromium_base_position;
+		var blinkRev = this.revInfo.blink_position;
 
 		return [
-			this.isUrlCORS ?	'https://frontend.chrome-dev.tools/serve_rev/@' :
-								'chrome-devtools://devtools/remote/serve_rev/@',
+			this.isUrlCORS ? 'https://frontend.chrome-dev.tools/serve_rev/@' :
+				'chrome-devtools://devtools/remote/serve_rev/@',
 
-			blink_rev, // e.g. 198714
+			blinkRev, // e.g. 198714
 
 			// Devtools previously used devtools.html : codereview.chromium.org/1144393004/
-			chrome_rev < 332419 ?	'/devtools.html' :
-									'/inspector.html',
+			chromeRev < 332419 ? '/devtools.html' : '/inspector.html',
 
 			'?loadTimelineFromURL=', url
 		].join('');
 	}
 
-	checkForCORS(){
+	checkForCORS() {
 
 		// if the URL is CORS-y we can do a clickable URL
 		return window.fetch(this.inputUrl, {
@@ -72,12 +71,12 @@ class TimelineUrl {
 				.catch( (err) => 'chill' ); // this.isUrlCORS remains false
 	}
 
-	normalizeInputUrl(url){
+	normalizeInputUrl(url) {
 		// hack to get CORS for all dropbox links  www.dropboxforum.com/hc/communities/public/questions/202364979-CORS-issue-when-trying-to-download-shared-file?page=1#answer-201025649
 		return url.replace('https://www.dropbox.com/s/', 'https://dl.dropboxusercontent.com/s/');
 	}
 
-	generateUrl(){
+	generateUrl() {
 
 		this.generateBtn.textContent = '🔄';
 		this.resultsDiv.hidden = true;
@@ -87,7 +86,6 @@ class TimelineUrl {
 		this.checkForCORS()
 		.then(this.getRevs.bind(this))
 		.then(() => {
-
 			this.outputUrl = this.getUrl(this.inputUrl);
 
 			new Clipboard({
@@ -98,8 +96,8 @@ class TimelineUrl {
 		}.bind(this));
 	}
 
-	success(opts){
-		if (opts.copied === false) {
+	success(opts) {
+		if (!opts.copied) {
 			this.confirmation.hidden = true;
 		}
 
