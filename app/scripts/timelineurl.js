@@ -1,3 +1,4 @@
+/*global fetch, Promise, Clipboard*/
 'use strict';
 
 class TimelineUrl {
@@ -98,8 +99,9 @@ class TimelineUrl {
 	}
 
 	success(opts){
-		if (opts.copied == false)
+		if (opts.copied === false) {
 			this.confirmation.hidden = true;
+		}
 
 		this.generateBtn.textContent = 'Generate';
 		this.result.value = this.outputUrl;

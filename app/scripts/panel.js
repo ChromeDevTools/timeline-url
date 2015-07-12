@@ -1,3 +1,4 @@
+/*global TimelineUrl*/
 'use strict';
 
 class TimelineUrlPane {

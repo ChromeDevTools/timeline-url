@@ -7,8 +7,9 @@ class Clipboard {
 		this.callback = opts.callback;
 		this.doc = this.input.ownerDocument;
 
-		if (!this.doc.queryCommandSupported('copy'))
+		if (!this.doc.queryCommandSupported('copy')) {
 			this.callback({ copied : false });
+		}
 
 		this.copyTextToClipboard();
 	}
