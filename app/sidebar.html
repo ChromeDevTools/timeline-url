@@ -3,22 +3,50 @@
 	#timeline-url, #result {
 		width: 100%;
 	}
-	#generate {
+	#generateBtn {
 		width: 80%;
 		margin: 5px 10%;
 	}
-	#result { 
-		height: 57px;
+	#result {
+    	font-size: 9px;
 	}
 	body {
-		min-height: 180px;
+		    background-color: hsla(0,0%,96%,1);
+	}
+	ol {
+		margin: 2px;
+		padding-left: 30px;
+	}
+	ol input {
+		width: calc(100% - 14px );
+	}
+	summary {
+		cursor: pointer;
+    	-webkit-user-select: none;
+	}
+	#confirmation {
+		margin-bottom: 0;
+	}
+	#results {
+		transition: opacity 150ms;
+		opacity: 0;
 	}
 </style>
 
+<p>Right-click in the Timeline panel, <em>Save Timeline Data…</em>, then upload the JSON to a publically available URL.</p>
+<input type="url" id="timeline-url" placeholder="URL to uploaded timeline json" >
+<button id="generateBtn">Generate URL</button>
 
-<p>Please upload your JSON to a publically available URL.</p>
-<input type="url" id="timeline-url" placeholder="URL to uploaded timeline json">
-<button id="generate">Generate Timeline URL…</button>
+<div id="results">
+	<p id="confirmation" hidden>✅ This URL has just been copied to your clipboard</p>
+	<input id="result" readonly hidden>
+</div>
 
-<p id="confirmation" hidden>This URL has just been copied to your clipboard:</p>
-<textarea id="result" readonly hidden></textarea>
+<details>
+	<summary>Demo traces</summary>
+	<ol>
+		<li><input readonly value="https://dl.dropboxusercontent.com/u/39519/temp/kenneth-io-Timeline.json" >
+		<li><input readonly value="https://docs.google.com/uc?id=0B7K1Uipy0SbDdDQ2TE9PV2ZuYnM&export=download">
+		<li><input readonly value="https://www.dropbox.com/s/v9ztabhcja9rb3z/TimelineRawData-20150228T122014?raw=1">
+	</ol>
+</details>
