@@ -1,11 +1,81 @@
 <!doctype html>
 <style>
-	#timeline-url, #result {
+	#result {
 		width: 100%;
+	}
+	p {
+		margin: 6px 0px;
+		color: #333;
+	}
+	.flex { 
+		display: flex;
+	}
+	#generateBtn {
+		margin: 2px 5px;
+    	flex: 0 1 64px;
+	}
+	input#timeline-url {
+		flex: 1 1 auto;
+	}
+	#result {
+    	font-size: 9px;
+	}
+	body {
+		    background-color: hsla(0,0%,96%,1);
+	}
+	ol {
+		margin: 2px;
+		padding-left: 30px;
+	}
+	ol input {
+		width: calc(100% - 14px );
+		margin-bottom: 1px;
+	}
+	summary {
+		cursor: pointer;
+    	-webkit-user-select: none;
+    	margin-top: 8px;
+	}
+	#confirmation {
+		margin: 2px 0 0;
+	}
+	#results {
+		will-change: opacity;
+	}
+	#results:not([hidden]) {
+		animation: fade-in 500ms;
+	}
+	results:not([hidden]) > .confirmation > span {
+		animation: fade-out 500ms;
+		animation-delay: 750ms;
+	}
+	@keyframes fade-in {
+		from 	{ opacity: 0 },
+		to 		{ opacity: 1 }
+	}
+	@keyframes fade-out {
+		from 	{ opacity: 1 },
+		to 		{ opacity: 0 }
 	}
 </style>
 
-<input type="url" id="timeline-url" placeholder="The URL to your downloaded timeline">
-<p>Please do note that the data should be publicly accessible.</p>
-<button id="generate">Generate</button>
-<textarea id="result"></textarea>
+<p>Right-click in the Timeline panel, <em>Save Timeline Data…</em>, then upload the JSON to a publically available URL.</p>
+
+<div class="flex">
+	<input type="url" id="timeline-url" placeholder="URL of uploaded timeline json" >
+	<button id="generateBtn">Generate URL</button>
+</div>
+
+<div id="results" hidden>
+	<p id="confirmation"><span>✅</span> Your new URL is copied to your clipboard:</p>
+	<input id="result" readonly>
+</div>
+
+<details>
+	<summary>Demo traces</summary>
+	<ol>
+		<li><input readonly value="https://dl.dropboxusercontent.com/u/39519/temp/kenneth-io-Timeline.json" >
+		<li><input readonly value="https://docs.google.com/uc?id=0B7K1Uipy0SbDdDQ2TE9PV2ZuYnM&export=download">
+		<li><input readonly value="https://www.dropbox.com/s/v9ztabhcja9rb3z/TimelineRawData-20150228T122014?raw=1">
+	</ol>
+</details>
