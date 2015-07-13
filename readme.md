@@ -1,4 +1,4 @@
-# timeline-url
+# [timeline-url](https://chrome.google.com/webstore/detail/timeline-url-for-devtools/oclhnibplhejninpifaddfoodnmpcpok)
 
 > Socialising the profiling experience by making it a little easier to share timelines
 
