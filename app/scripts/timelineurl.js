@@ -64,8 +64,6 @@ class TimelineUrl {
 
 	checkForCORS() {
 
-		var _this = this;
-
 		// if the URL is CORS-y we can do a clickable URL
 		return window.fetch(this.inputUrl, {
 			mode: 'cors',
