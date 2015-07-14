@@ -1,15 +1,19 @@
 {
-	"name": "Timeline URL for DevTools",
-	"version": "0.0.6",
-	"manifest_version": 2,
-	"description": "Easily share a devtools timeline using a simple URL",
-	"devtools_page": "devtools.html",
-	"icons": {
-		"16": "images/icon-16.png",
-		"128": "images/icon-128.png"
-	},
-	"background": {
-		"scripts": [ "scripts/chromereload.js" ]
-	},
-	"permissions": [ "clipboardWrite" ]
+  "name": "Timeline URL for DevTools",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "description": "Easily share a devtools timeline using a simple URL",
+  "devtools_page": "devtools.html",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js"
+    ]
+  },
+  "permissions": [
+    "clipboardWrite"
+  ]
 }

@@ -181,7 +181,9 @@ module.exports = function (grunt) {
 					buildnumber: true,
 					indentSize: 2,
 					background: {
-						target: 'scripts/background.js',
+						target: [
+							'scripts/clipboard.js', 'scripts/panel.js', 'scripts/timeline-url.js'
+						],
 						exclude: [
 							'scripts/chromereload.js'
 						]
