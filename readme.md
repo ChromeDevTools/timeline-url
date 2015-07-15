@@ -38,7 +38,7 @@ Just paste the URL in your address bar and magic happens.
 
 ## License
 
-Apache 2.0
+Apache 2.0  
 Copyright 2015 [Arthur Verschaeve](http://arthurverschaeve.be)
 
 ![](http://i.imgur.com/otBJWYZ.jpg)
