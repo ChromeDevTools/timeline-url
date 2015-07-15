@@ -1,4 +1,4 @@
-# [timeline-url](https://chrome.google.com/webstore/detail/timeline-url-for-devtools/oclhnibplhejninpifaddfoodnmpcpok)
+# DevTools Timeline URL extension
 
 Socialising the profiling experience by making it a little easier to share timelines. This Chrome DevTools extension helps you generate a URL to share your timeline.
 
@@ -11,6 +11,10 @@ Here's a URL the tool generated. Go ahead and click it.
 ```
 https://frontend.chrome-dev.tools/serve_rev/@198714/inspector.html?loadTimelineFromURL=https://dl.dropboxusercontent.com/u/39519/temp/kenneth-io-Timeline.json
 ```
+
+## Install
+
+https://chrome.google.com/webstore/detail/timeline-url-for-devtools/oclhnibplhejninpifaddfoodnmpcpok
 
 ## Usage
 
