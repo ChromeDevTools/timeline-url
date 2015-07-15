@@ -27,13 +27,15 @@ class TimelineUrl {
 			'https://omahaproxy.appspot.com/webkit.json?version='];
 
 		// take our two URLs, fetch them in parallel, parse to JSON, and merge.
-		return revUrls.map(
-			(url) => fetch(url + chromeVersion)
-		).reduce(function handleJSON(chain, revPromise) {
-			return revPromise
-				.then((payload) => payload.json())
-				.then((json) => Object.assign(revInfo, json));
-		}, Promise.resolve())
+		return revUrls.map(function (url) {
+			return fetch(url + chromeVersion);
+		}).reduce(function handleJSON(chain, revPromise) {
+			return revPromise.then(function (payload) {
+				return payload.json();
+			}).then(function (json) {
+				return Object.assign(revInfo, json);
+			});
+		}, Promise.resolve());
 
 		.then(function(revInfo){
 			// {"chromium_base_position":"338390","blink_position":"198714", …
@@ -64,11 +66,14 @@ class TimelineUrl {
 
 		// if the URL is CORS-y we can do a clickable URL
 		return window.fetch(this.inputUrl, {
-					mode: 'cors',
-					method: 'HEAD'
-				})
-				.then( (resp) => this.isUrlCORS = true  )
-				.catch( (err) => 'chill' ); // this.isUrlCORS remains false
+			mode: 'cors',
+			method: 'HEAD'
+		}).then(function (resp) {
+			return this.isUrlCORS = true;
+		}.bind(this))
+		.catch(function (err) {
+			return 'chill';  // this.isUrlCORS remains false
+		});
 	}
 
 	normalizeInputUrl(url) {
@@ -85,7 +90,7 @@ class TimelineUrl {
 
 		this.checkForCORS()
 		.then(this.getRevs.bind(this))
-		.then(() => {
+		.then(function() {
 			this.outputUrl = this.getUrl(this.inputUrl);
 
 			new Clipboard({
