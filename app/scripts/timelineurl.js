@@ -35,9 +35,7 @@ class TimelineUrl {
 			}).then(function (json) {
 				return Object.assign(revInfo, json);
 			});
-		}, Promise.resolve());
-
-		.then(function(revInfo){
+		}, Promise.resolve()).then(function(revInfo){
 			// {"chromium_base_position":"338390","blink_position":"198714", …
 			this.revInfo = revInfo;
 		}.bind(this));
@@ -69,7 +67,7 @@ class TimelineUrl {
 			mode: 'cors',
 			method: 'HEAD'
 		}).then(function (resp) {
-			return this.isUrlCORS = true;
+			this.isUrlCORS = true;
 		}.bind(this))
 		.catch(function (err) {
 			return 'chill';  // this.isUrlCORS remains false
