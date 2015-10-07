@@ -31,7 +31,6 @@ class TimelineUrl {
 	}
 
 	getUrl(url) {
-		var position = this.revs.chromium_base_position;
 		var commit = this.revs.chromium_base_commit;
 
 		return [
@@ -40,8 +39,8 @@ class TimelineUrl {
 
 			commit, // e.g. 198714
 
-			// Devtools previously used devtools.html : codereview.chromium.org/1144393004/
-			position < 332419 ? '/devtools.html' : '/inspector.html',
+			// Previously `devtools.html` was used instead: codereview.chromium.org/1144393004/
+			'/inspector.html',
 
 			'?loadTimelineFromURL=', url
 		].join('');
