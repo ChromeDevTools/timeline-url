@@ -39,7 +39,7 @@ class TimelineUrl {
 
 			commit, // e.g. 198714
 
-			// Previously `devtools.html` was used instead: codereview.chromium.org/1144393004/
+			// Previously to revision 332419 (m45) `devtools.html` was used: codereview.chromium.org/1144393004/
 			'/inspector.html',
 
 			'?loadTimelineFromURL=', url
