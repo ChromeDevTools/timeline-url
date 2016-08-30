@@ -9,7 +9,7 @@ Socialising the profiling experience by making it a little easier to share timel
 
 Here's a URL the tool generated. Go ahead and click it.
 ```
-https://frontend.chrome-dev.tools/serve_rev/@198714/inspector.html?loadTimelineFromURL=https://dl.dropboxusercontent.com/u/39519/temp/kenneth-io-Timeline.json
+https://frontend.chrome-dev.tools/serve_rev/@0ca1f564f9660554511191fbd38bec101ca6f08d/inspector.html?loadTimelineFromURL=https://dl.dropboxusercontent.com/u/39519/temp/kenneth-io-Timeline.json
 ```
 
 ## Install
